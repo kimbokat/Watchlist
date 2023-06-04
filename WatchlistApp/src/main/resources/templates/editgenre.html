@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css"
+	th:href="@{/css/bootstrap.min.css}" />
+<title>Movies To Watch</title>
+</head>
+<body>
+	<div class="container">
+		<h3>Edit genre</h3>
+		<form action="../savegenre" method="post" th:object="${genre}">
+
+			<input type="hidden" th:field="*{genreid}" />
+
+			<div class="form-group">
+				<label for="genreName">Name:</label> <input type="text" id="genreName"
+					th:field="*{name}" class="form-control" style="width: 300px;" />
+				<div style="clear: both; display: block; height: 10px;"></div>
+
+			</div>
+			<input type="submit" value="Save" class="btn btn-primary"></input> <a
+				href="/genrelist" class="btn btn-danger">Cancel</a>
+		</form>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css"
+	th:href="@{/css/bootstrap.min.css}" />
+<title>Movies To Watch</title>
+</head>
+<body>
+	<div class="container">
+		<h3>Add a movie</h3>
+		<div>
+			<form th:object="${movie}" th:action="@{save}" action="#"
+				method="post">
+
+				<div class="form-group">
+					<label for="title">Name: </label> <input type="text" id="title"
+						th:field="*{title}" class="form-control" style="width: 300px;" />
+
+					<div style="clear: both; display: block; height: 10px;"></div>
+
+					<label for="year">Year: </label> <input type="text" id="year"
+						th:field="*{year}" class="form-control" style="width: 300px;" />
+
+					<div style="clear: both; display: block; height: 10px;"></div>
+
+					<label for="rating">Rating: </label> <input type="text" id="rating"
+						th:field="*{rating}" class="form-control" style="width: 300px;" />
+
+					<div style="clear: both; display: block; height: 10px;"></div>
+
+					<label for="genrelist">Genre: </label> <select id="genrelist"
+						th:field="*{genre}" class="form-control" style="width: 200px;">
+
+						<option th:each="genre : ${genres}" th:value="${genre.genreid}"
+							th:text="${genre.name}"></option>
+					</select>
+					<div style="clear: both; display: block; height: 10px;"></div>
+
+				</div>
+
+				<button type="submit" value="Save" class="btn btn-primary">Save</button>
+				<a href="/movielist" class="btn btn-danger">Cancel</a>
+			</form>
+		</div>
+	</div>
+
+</body>
+</html>

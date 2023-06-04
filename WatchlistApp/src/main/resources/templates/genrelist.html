@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css"
+	th:href="@{/css/bootstrap.min.css}" />
+<title>Movies To Watch</title>
+</head>
+<body>
+	<div class="container">
+		<h3>Genres to choose from</h3>
+
+
+
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Genre</th>
+					<th sec:authorize="hasAuthority('ADMIN')"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="genre : ${genres}">
+					<td th:text="${genre.name}"></td>
+					<td><a th:href="@{/editgenre/{id}(id=${genre.genreid})}"
+						class="btn btn-success btn-xs">Edit</a></td>
+
+					<td sec:authorize="hasAuthority('ADMIN')"><a
+						th:href="@{/delete/{id}(id=${genre.genreid})}"
+						class="btn btn-xs btn-danger">Delete</a></td>
+
+				</tr>
+			</tbody>
+		</table>
+
+		<a href="/movielist" class="btn btn-primary">Home</a>
+	</div>
+</body>
+
+</html>

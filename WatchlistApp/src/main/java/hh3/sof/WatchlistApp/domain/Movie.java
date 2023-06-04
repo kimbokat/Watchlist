@@ -1,26 +1,43 @@
 package hh3.sof.WatchlistApp.domain;
 
-import org.springframework.boot.autoconfigure.domain.EntityScan;
+
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
-@EntityScan
+@Entity
 public class Movie {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private String name;
+	private String title;
 	@Column(name = "publishing_year")
 	private int year;
 	private double rating;
 	
+	@ManyToOne
+	@JsonIgnoreProperties("movies")
+	@JoinColumn(name = "genreid")
+	private Genre genre;
+	
 	public Movie() {}
 
-	public Movie(Long id, String name, int year, double rating) {
+	public Movie(String title, int year, double rating, Genre genre) {
 		super();
-		this.id = id;
-		this.name = name;
+		this.title = title;
 		this.year = year;
 		this.rating = rating;
+		this.genre = genre;
+		
+		
 	}
 
 	public Long getId() {
@@ -31,12 +48,12 @@ public class Movie {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public int getYear() {
@@ -54,11 +71,24 @@ public class Movie {
 	public void setRating(double rating) {
 		this.rating = rating;
 	}
+	
+	public Genre getGenre() {
+		return genre;
+	}
+	
+	public void setGenre(Genre genre) {
+		this.genre = genre;
+	}
+	
 
 	@Override
 	public String toString() {
-		return "id=" + id + ", name=" + name + ", year=" + year + ", rating=" + rating;
+		if (this.genre != null)
+		return "id=" + id + ", title=" + title + ", year=" + year + ", rating=" + rating + this.getGenre();
+		else
+			return "id=" + id + ", title=" + title + ", year=" + year + ", rating=" + rating;
 	}
+
 	
 	
 	

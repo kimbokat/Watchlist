@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css"
+          th:href="@{/css/bootstrap.min.css}" />
+    <title>Movies To Watch</title>
+</head>
+<body>
+  <div class="container">
+	<div class="col-md-4">
+		<h1>Movies To Watch</h1>
+	</div>
+	<div class="col-md-4 text-right">
+			<b>Logged in as: <span sec:authentication="name"></span></b>
+	</div>
+	<div class="col-md-4 text-right">
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+		</form>
+	</div>
+  
+
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Rating</th>
+            <th>Genre</th>
+            <th sec:authorize="hasAuthority('ADMIN')"></th>
+            
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="movie : ${movies}">
+        
+            <td th:text="${movie.title} + ' (' + ${movie.year} + ')'"></td>
+            <td th:text="${movie.rating}"></td>
+            <td th:text="${movie.genre} ? ${movie.genre.name} : 'N/A'"></td>
+            <td><a th:href="@{/edit/{id}(id=${movie.id})}"
+                   class="btn btn-success btn-xs">Edit</a></td>
+             <td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${movie.id})}" class="btn btn-xs btn-danger">Delete</a></td>    		
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="/addmovie" class="btn btn-primary">Add a movie</a>
+    <a href="/addgenre" class="btn btn-primary">Add a genre</a>
+    <a href="/genrelist" class="btn">View genres</a>
+</div>
+</body>
+</html>
