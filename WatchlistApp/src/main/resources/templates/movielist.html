@@ -41,7 +41,8 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
             <td th:text="${movie.title} + ' (' + ${movie.year} + ')'"></td>
             <td th:text="${movie.rating}"></td>
             <td th:text="${movie.genre} ? ${movie.genre.name} : 'N/A'"></td>
-            <td><a th:href="@{/edit/{id}(id=${movie.id})}"
+            
+            <td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/edit/{id}(id=${movie.id})}"
                    class="btn btn-success btn-xs">Edit</a></td>
              <td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${movie.id})}" class="btn btn-xs btn-danger">Delete</a></td>    		
         </tr>

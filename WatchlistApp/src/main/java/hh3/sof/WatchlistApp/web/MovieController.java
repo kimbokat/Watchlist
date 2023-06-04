@@ -43,7 +43,7 @@ public class MovieController {
 	}
 	
 	@GetMapping(value = "/edit/{id}")
-//	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")  
+	@PreAuthorize("hasAuthority('ADMIN')")  
 	public String editMovie(@PathVariable("id") Long movieId, Model model) {
 	    model.addAttribute("movie", movieRepository.findById(movieId));
 	    model.addAttribute("genres", genreRepository.findAll());

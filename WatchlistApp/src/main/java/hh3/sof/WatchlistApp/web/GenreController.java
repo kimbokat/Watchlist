@@ -31,12 +31,14 @@ public class GenreController {
 	}
 
 	@GetMapping(value = "/editgenre/{id}")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public String editGenre(@PathVariable("id") Long genreId, Model model) {
 		model.addAttribute("genre", genreRepository.findById(genreId));
 		return "editgenre";
 	}
 
 	@PostMapping("/savegenre")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public String save(Genre genre) {
 		genreRepository.save(genre);
 		return "redirect:genrelist";

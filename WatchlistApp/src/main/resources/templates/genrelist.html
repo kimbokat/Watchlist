@@ -24,7 +24,8 @@
 			<tbody>
 				<tr th:each="genre : ${genres}">
 					<td th:text="${genre.name}"></td>
-					<td><a th:href="@{/editgenre/{id}(id=${genre.genreid})}"
+					<td sec:authorize="hasAuthority('ADMIN')"><a
+						th:href="@{/editgenre/{id}(id=${genre.genreid})}"
 						class="btn btn-success btn-xs">Edit</a></td>
 
 					<td sec:authorize="hasAuthority('ADMIN')"><a

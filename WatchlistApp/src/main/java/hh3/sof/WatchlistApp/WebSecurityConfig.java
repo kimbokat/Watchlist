@@ -21,9 +21,10 @@ public class WebSecurityConfig {
 		@Bean
 	   public SecurityFilterChain configure(HttpSecurity http) throws Exception {
 	       http
+	       		.csrf().disable() // disabled CSRF for functional edit
 	            .authorizeHttpRequests()
 	            	.requestMatchers("/css/**").permitAll()
-	            	.requestMatchers("/signup", "/saveuser").permitAll()
+	            	.requestMatchers("/signup", "/save**", "/edit**").permitAll()
 	            	.anyRequest().authenticated()
 	            	.and()
 	            .formLogin()
@@ -33,7 +34,7 @@ public class WebSecurityConfig {
 	                .and()
 	            .logout()
 	                .permitAll()
-//	                .invalidateHttpSession(true)
+	                .invalidateHttpSession(true)
 	                .and()
 	            .httpBasic();
 	            return http.build();
