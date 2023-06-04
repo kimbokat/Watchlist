@@ -24,7 +24,7 @@ public class WebSecurityConfig {
 	       		.csrf().disable() // disabled CSRF for functional edit
 	            .authorizeHttpRequests()
 	            	.requestMatchers("/css/**").permitAll()
-	            	.requestMatchers("/signup", "/save**", "/edit**").permitAll()
+	            	.requestMatchers("/signup", "/save**").permitAll()
 	            	.anyRequest().authenticated()
 	            	.and()
 	            .formLogin()

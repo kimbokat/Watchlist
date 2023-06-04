@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+
 import hh3.sof.WatchlistApp.domain.GenreRepository;
 import hh3.sof.WatchlistApp.domain.Movie;
 import hh3.sof.WatchlistApp.domain.MovieRepository;
@@ -36,7 +37,6 @@ public class MovieController {
 		
 
 	@PostMapping("/save")
-	@PreAuthorize("hasAuthority('ADMIN')")
 	public String saveMovie(Movie movie) {
 		movieRepository.save(movie);
 		return "redirect:movielist";

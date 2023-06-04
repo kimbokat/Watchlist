@@ -38,7 +38,6 @@ public class GenreController {
 	}
 
 	@PostMapping("/savegenre")
-	@PreAuthorize("hasAuthority('ADMIN')")
 	public String save(Genre genre) {
 		genreRepository.save(genre);
 		return "redirect:genrelist";
